@@ -3,7 +3,7 @@ organization := "org.scala-debugger"
 
 name := "sbt-jdi-tools"
 
-sbtPlugin := true
+enablePlugins(SbtPlugin)
 
 version := "1.1.1"
 
@@ -18,7 +18,7 @@ scalaVersion := "2.12.20"
 pluginCrossBuild / sbtVersion := {
   scalaBinaryVersion.value match {
     case "2.12" =>
-      (pluginCrossBuild / sbtVersion).value
+      "1.5.8"
     case _ =>
       "2.0.0-M2"
   }
