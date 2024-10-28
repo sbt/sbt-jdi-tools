@@ -14,7 +14,7 @@ licenses += (
 
 homepage := Some(url("http://scala-debugger.org"))
 
-scalaVersion := "2.12.4"
+scalaVersion := "2.12.20"
 
 scalacOptions ++= Seq(
   "-encoding", "UTF-8", "-target:jvm-1.8",
