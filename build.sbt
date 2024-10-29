@@ -1,5 +1,5 @@
 
-organization := "org.scala-debugger"
+organization := "com.github.sbt"
 
 name := "sbt-jdi-tools"
 
@@ -12,7 +12,7 @@ licenses += (
   url("https://www.apache.org/licenses/LICENSE-2.0.html")
 )
 
-homepage := Some(url("http://scala-debugger.org"))
+homepage := Some(url("https://github.com/sbt/sbt-jdi-tools"))
 
 scalaVersion := "2.12.20"
 pluginCrossBuild / sbtVersion := {
