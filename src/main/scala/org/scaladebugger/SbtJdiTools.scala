@@ -26,7 +26,7 @@ object SbtJdiTools extends AutoPlugin {
       Seq(
         // JDK Dependency (just for sbt, must exist on classpath for execution,
         // cannot be redistributed)
-        unmanagedJars += { Attributed.blank(JavaTools) }
+        unmanagedJars += Compat.toClassEntry(JavaTools)
       )
     else
       // on Java 9+, we don't need to do anything at all
