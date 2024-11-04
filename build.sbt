@@ -14,7 +14,11 @@ licenses += (
 
 homepage := Some(url("https://github.com/sbt/sbt-jdi-tools"))
 
-scalaVersion := "2.12.20"
+val scala212 = "2.12.20"
+val scala3 = "3.3.4"
+
+scalaVersion := scala212
+crossScalaVersions := Seq(scala212, scala3)
 pluginCrossBuild / sbtVersion := {
   scalaBinaryVersion.value match {
     case "2.12" =>
@@ -25,11 +29,11 @@ pluginCrossBuild / sbtVersion := {
 }
 
 scalacOptions ++= Seq(
-  "-encoding", "UTF-8", "-target:jvm-1.8",
+  "-encoding", "UTF-8",
   "-deprecation", "-unchecked", "-feature",
   "-Xfatal-warnings"
 ) ++ (CrossVersion.partialVersion(scalaVersion.value) match {
-  case Some((2, scalaMajor)) if scalaMajor == 10 => Seq("-Ywarn-all")
+  case Some((2, _)) => Seq("-target:jvm-1.8")
   case _ => Nil
 })
 
