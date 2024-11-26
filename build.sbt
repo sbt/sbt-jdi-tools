@@ -1,6 +1,5 @@
 
 organization := "com.github.sbt"
-
 name := "sbt-jdi-tools"
 
 enablePlugins(SbtPlugin)
@@ -9,8 +8,21 @@ licenses += (
   "Apache-2.0",
   url("https://www.apache.org/licenses/LICENSE-2.0.html")
 )
-
 homepage := Some(url("https://github.com/sbt/sbt-jdi-tools"))
+developers := List(
+  Developer(
+    "senkwich",
+    "Chip Senkbeil",
+    "chip.senkbeil@gmail.com",
+    url("http://www.chipsenkbeil.org")
+  ),
+  Developer(
+    "adpi2",
+    "Adrien Piquerez",
+    "adrien.piquerez@gmail.com",
+    url("https://github.com/adpi2/")
+  )
+)
 
 val scala212 = "2.12.20"
 val scala3 = "3.3.4"
@@ -40,7 +52,7 @@ javacOptions ++= Seq(
   "-Xlint:-options", "-Xlint:-path", "-Xlint:-processing"
 )
 
-scalacOptions in (Compile, doc) ++= Seq(
+Compile / doc / scalacOptions ++= Seq(
   "-no-link-warnings" // Suppress problems with Scaladoc @throws links
 )
 
@@ -48,32 +60,7 @@ scalacOptions in (Compile, doc) ++= Seq(
 autoAPIMappings := true
 
 // Prevent publishing test artifacts
-publishArtifact in Test := false
-
-publishMavenStyle := true
-
-pomIncludeRepository := { _ => false }
-
-pomExtra :=
-  <scm>
-    <url>git@github.com:ensime/sbt-jdi-tools.git</url>
-    <connection>scm:git:git@github.com:ensime/sbt-jdi-tools.git</connection>
-  </scm>
-    <developers>
-      <developer>
-        <id>senkwich</id>
-        <name>Chip Senkbeil</name>
-        <url>http://www.chipsenkbeil.org</url>
-      </developer>
-    </developers>
-
-publishTo := {
-  val nexus = "https://oss.sonatype.org/"
-  if (isSnapshot.value)
-    Some("snapshots" at nexus + "content/repositories/snapshots")
-  else
-    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
-}
+Test / publishArtifact := false
 
 ThisBuild / githubWorkflowTargetTags ++= Seq("v*")
 ThisBuild / githubWorkflowPublishTargetBranches :=
