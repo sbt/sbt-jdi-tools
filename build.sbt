@@ -25,16 +25,16 @@ developers := List(
 )
 
 val scala212 = "2.12.20"
-val scala3 = "3.3.4"
+val scala3 = "3.7.3"
 
-scalaVersion := scala212
-crossScalaVersions := Seq(scala212, scala3)
+ThisBuild / scalaVersion := scala212
+ThisBuild / crossScalaVersions := Seq(scala212, scala3)
 pluginCrossBuild / sbtVersion := {
   scalaBinaryVersion.value match {
     case "2.12" =>
       "1.5.8"
     case _ =>
-      "2.0.0-M2"
+      "2.0.0-RC5"
   }
 }
 
