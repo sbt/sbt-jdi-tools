@@ -1,6 +1,7 @@
 package org.scaladebugger
 
 import java.io.FileNotFoundException
+import org.scaladebugger.Compat._
 
 import sbt._
 import sbt.Keys._
@@ -17,16 +18,16 @@ object SbtJdiTools extends AutoPlugin {
   override def requires = plugins.JvmPlugin
   override def trigger = allRequirements
 
-  override def projectSettings: Seq[Def.Setting[_]] = inConfig(Compile)(settings)
+  override def projectSettings: Seq[Def.Setting[?]] = inConfig(Compile)(settings)
 
   lazy val settings = baseScalaDebuggerToolsSettings
 
-  lazy val baseScalaDebuggerToolsSettings: Seq[Def.Setting[_]] =
+  lazy val baseScalaDebuggerToolsSettings: Seq[Def.Setting[?]] =
     if (System.getProperty("java.specification.version").startsWith("1."))
       Seq(
         // JDK Dependency (just for sbt, must exist on classpath for execution,
         // cannot be redistributed)
-        unmanagedJars += Compat.toClassEntry(JavaTools)
+        unmanagedJars += Def.uncached(Compat.toClassEntry(JavaTools))
       )
     else
       // on Java 9+, we don't need to do anything at all
