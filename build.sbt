@@ -41,7 +41,7 @@ pluginCrossBuild / sbtVersion := {
 scalacOptions ++= Seq(
   "-encoding", "UTF-8",
   "-deprecation", "-unchecked", "-feature",
-  "-Xfatal-warnings"
+  "-Werror"
 ) ++ (CrossVersion.partialVersion(scalaVersion.value) match {
   case Some((2, _)) => Seq("-target:jvm-1.8")
   case _ => Nil
